@@ -8,27 +8,30 @@ import DeveloperPages from "./DeveloperPages";
 import ProjectsPages from "./ProjectsPages";
 import TableDashboard from "../components/ui/TableDashboard/TableDashboard";
 import FormDashboard from "../components/ui/FormDashboard/FormDashboard";
+import { useState } from "react";
 
 function Dashboard() {
+const [draft, setDraft] = useState("");
   return (
     <>
       <Navbar adminName="mohamed" />
+
       <div className="d-flex">
-        <Sidebare />
+        <Sidebare draft={draft} />
         <main className="flex-grow-1">
           <Routes>
             <Route path="/" element={<StatusPages />} />
             <Route path="/Users" element={<UsersPages />}>
               <Route index element={<TableDashboard title="Users" add="Add New User" />} />
-              <Route path="add" element={<FormDashboard />} />
+              <Route path="add" element={<FormDashboard   setDraft={ setDraft}  role="User Management"/>} />
             </Route>
             <Route path="/Projects" element={<ProjectsPages />} >
               <Route index element={<TableDashboard title="Projects" add="Add New Project" />} />
-              <Route path="add" element={<FormDashboard />} />
+              <Route path="add" element={<FormDashboard  setDraft={setDraft}  role="Projects Management"/>} />
             </Route>
             <Route path="/Developers" element={< DeveloperPages />}>
               <Route index element={<TableDashboard title="Developers" add="Add New Developer" />} />
-              <Route path="add" element={<FormDashboard />} />
+              <Route path="add" element={<FormDashboard  setDraft={setDraft}  role="Developer Management"/>} />
             </Route>
           </Routes>
         </main>

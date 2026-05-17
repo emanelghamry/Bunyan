@@ -1,13 +1,13 @@
 import { NavLink } from "react-router-dom";
 import style from "./Sidebar.module.css";
-export default function Sidebare() {
+export default function Sidebare({ draft }) {
   const links = [
     { icon: "fa-chart-bar", title: "Status", path: "/" },
     { icon: "fa-users", title: "User Management", path: "/Users" },
-    { icon: "fa-building", title: "Projects Management", path: "/Projects"},
-    { icon: "fa-building", title: "Developer Management", path: "/Developers"},
+    { icon: "fa-building", title: "Projects Management", path: "/Projects" },
+    { icon: "fa-building", title: "Developer Management", path: "/Developers" },
     { icon: "fa-user", title: "Cms" },
-    { icon: "fa-message", title: "Live chat"},
+    { icon: "fa-message", title: "Live chat" },
   ]
 
 
@@ -19,13 +19,16 @@ export default function Sidebare() {
 
       <nav>
         {links.map((item, index) => (
-             <NavLink
+          <NavLink
             to={item.path}
             className={`${style.navItem} d-flex align-items-center gap-3 py-3 px-4 `}
             key={index}
           >
             <i className={`fa-solid ${item.icon} fs-5`}></i>
             <span className="fs-5">{item.title}</span>
+            {draft === item.title && (
+              <span className="text-danger ms-2">●</span>
+            )}
           </NavLink>
         ))}
       </nav>
